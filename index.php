@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
+session_start();
+require 'config/db.php';
 
-    <title>Sabor Brasil</title>
+$featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
+?>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-</head>
-<body>
+<?php include 'includes/header.php'; ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
-        <a class="navbar-brand" href="#">🍽️ Sabor Brasil</a>
+        <a class="navbar-brand" href="index.php">🍽️ Sabor Brasil</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
@@ -22,30 +17,77 @@
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto">
-
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link active" href="index.php">Home</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">Meals</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
-                </li>
-
+                <?php if (isset($_SESSION["user_id"])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<div class="container mt-4">
+    <?php if (isset($_SESSION["username"])): ?>
+        <p class="text-end">
+            Welcome, <strong><?php echo htmlspecialchars($_SESSION["username"]); ?></strong>!
+        </p>
+    <?php else: ?>
+        <p class="text-end">
+            <a href="login.php">Login</a> or <a href="register.php">Register</a>
+        </p>
+    <?php endif; ?>
 
-</body>
-</html>
+    <div class="text-center py-5 bg-light rounded mb-4">
+        <h1 class="display-5 fw-bold">Welcome to Sabor Brasil</h1>
+        <p class="lead mb-0">
+            Discover, review, and save your favourite Brazilian meals.
+        </p>
+    </div>
+
+    <h2 class="mb-4">Featured Brazilian Meals</h2>
+
+    <div class="row">
+        <?php if ($featuredMeals && $featuredMeals->num_rows > 0): ?>
+            <?php while ($meal = $featuredMeals->fetch_assoc()): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
+                            class="card-img-top"
+                            alt="<?php echo htmlspecialchars($meal['title']); ?>"
+                        >
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title"><?php echo htmlspecialchars($meal['title']); ?></h5>
+                            <p class="card-text"><?php echo htmlspecialchars($meal['description']); ?></p>
+                            <p class="mb-3"><strong>Category:</strong> <?php echo htmlspecialchars($meal['category']); ?></p>
+                            <a href="meal.php?id=<?php echo $meal['id']; ?>" class="btn btn-success mt-auto">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No meals found in the database.</p>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>
