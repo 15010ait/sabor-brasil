@@ -59,12 +59,12 @@ $featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
         </p>
     <?php endif; ?>
 
-    <div class="text-center py-5 bg-light rounded mb-4">
-        <h1 class="display-5 fw-bold">Welcome to Sabor Brasil</h1>
-        <p class="lead mb-0">
-            Discover, review, and save your favourite Brazilian meals.
-        </p>
-    </div>
+  <div class="text-center py-5 rounded mb-4 text-white" style="background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/images/banner.png') center/cover no-repeat; min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
+    <h1 class="display-5 fw-bold">Welcome to Sabor Brasil</h1>
+    <p class="lead mb-0">
+        Discover, review, and save your favourite Brazilian meals.
+    </p>
+</div>
 
     <h2 class="mb-4">Featured Brazilian Meals</h2>
 
