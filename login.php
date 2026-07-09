@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sabor Brasil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -50,15 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="row min-vh-100">
 
         <!-- Left: photo + brand message (hidden on small screens) -->
-        <div class="col-md-6 d-none d-md-flex text-white flex-column justify-content-end p-5"
-             style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('assets/images/login-image.png') center/cover no-repeat;">
+        <div class="col-md-6 d-none d-md-flex text-white flex-column justify-content-end p-5 login-hero">
             <h2 class="fw-bold">Discover the Soul of Brazilian Food</h2>
             <p>Explore authentic recipes, discover hidden gems, and connect with a community that celebrates Brazil's rich culinary heritage.</p>
         </div>
 
         <!-- Right: login form -->
         <div class="col-md-6 d-flex align-items-center justify-content-center p-4">
-            <div style="max-width: 380px; width: 100%;">
+            <div class="login-form-box">
 
                 <h3 class="fw-bold mb-1">Welcome Back</h3>
                 <p class="text-muted mb-4">Log in to continue exploring the best of Brazilian cuisine.</p>
