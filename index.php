@@ -9,7 +9,10 @@ $featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
-        <a class="navbar-brand" href="index.php">🍽️ Sabor Brasil</a>
+        <a class="navbar-brand d-flex align-items-center" href="index.php">
+    <img src="assets/images/logo-saborbrasil.png" alt="Sabor Brasil" height="32" class="me-2">
+    Sabor Brasil
+</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
