@@ -91,6 +91,64 @@ $featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
             <p>No meals found in the database.</p>
         <?php endif; ?>
     </div>
+
+    <!-- Categories -->
+    <div class="d-flex justify-content-between align-items-center mt-5 mb-4">
+        <h2 class="mb-0">Categories</h2>
+        <a href="#" class="text-success fw-bold text-decoration-none">View all &raquo;</a>
+    </div>
+
+    <div class="row text-center g-3 mb-4">
+        <div class="col-6 col-md-4 col-lg-2">
+            <a href="#" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem;">🍽️</div>
+                    <div class="mt-2 fw-semibold">Main Courses</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+            <a href="#" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem;">🍰</div>
+                    <div class="mt-2 fw-semibold">Desserts</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+            <a href="#" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem;">🥟</div>
+                    <div class="mt-2 fw-semibold">Snacks</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+            <a href="#" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem;">🥤</div>
+                    <div class="mt-2 fw-semibold">Drinks</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+            <a href="#" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem;">🥗</div>
+                    <div class="mt-2 fw-semibold">Vegetarian</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+            <a href="#" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem;">🦐</div>
+                    <div class="mt-2 fw-semibold">Seafood</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
 </div>
 
 <?php include 'includes/footer.php'; ?>
