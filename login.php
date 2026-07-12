@@ -43,34 +43,51 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sabor Brasil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow p-4" style="max-width: 420px; width: 100%;">
-        <h2 class="text-center mb-4">Login</h2>
+<div class="container-fluid">
+    <div class="row min-vh-100">
 
-        <?php if ($message): ?>
-            <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
-        <?php endif; ?>
+        <!-- Left: photo + brand message (hidden on small screens) -->
+        <div class="col-md-6 d-none d-md-flex text-white flex-column justify-content-end p-5 login-hero">
+            <h2 class="fw-bold">Discover the Soul of Brazilian Food</h2>
+            <p>Explore authentic recipes, discover hidden gems, and connect with a community that celebrates Brazil's rich culinary heritage.</p>
+        </div>
 
-        <form method="POST" action="">
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Enter email">
+        <!-- Right: login form -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center p-4">
+            <div class="login-form-box">
+
+                <h3 class="fw-bold mb-1">Welcome Back</h3>
+                <p class="text-muted mb-4">Log in to continue exploring the best of Brazilian cuisine.</p>
+
+                <?php if ($message): ?>
+                    <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
+                <?php endif; ?>
+
+                <form method="POST" action="">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Enter email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password">
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Login</button>
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    Don't have an account? <a href="register.php">Register</a>
+                </p>
+
             </div>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Enter password">
-            </div>
-
-            <button type="submit" class="btn btn-success w-100">Login</button>
-        </form>
-
-        <p class="text-center mt-3 mb-0">
-            Don't have an account? <a href="register.php">Register</a>
-        </p>
     </div>
 </div>
 

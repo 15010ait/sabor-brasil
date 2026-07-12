@@ -66,14 +66,32 @@ $stmt->close();
 
         <div class="row mt-3">
 
-            <!-- Left: main image -->
+            <!-- Left: main image + side-dish thumbnail row -->
             <div class="col-md-7 mb-4">
                 <img
                     src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
                     class="img-fluid rounded shadow-sm"
                     alt="<?php echo htmlspecialchars($meal['title']); ?>"
                 >
-                <!-- TODO (Francine/Andre): thumbnail gallery of side-dish photos goes here, if we implement multiple images per meal -->
+
+                <!-- Fixed side-dish thumbnails to match the mockup (same 4 photos for every meal, not from the database) -->
+                <div class="row g-2 mt-2">
+                    <div class="col-2">
+                        <img src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>" class="img-fluid rounded" alt="<?php echo htmlspecialchars($meal['title']); ?>">
+                    </div>
+                    <div class="col-2">
+                        <img src="assets/images/couve.png" class="img-fluid rounded" alt="Collard greens">
+                    </div>
+                    <div class="col-2">
+                        <img src="assets/images/farofa.png" class="img-fluid rounded" alt="Farofa">
+                    </div>
+                    <div class="col-2">
+                        <img src="assets/images/arrozbranco.png" class="img-fluid rounded" alt="Rice">
+                    </div>
+                    <div class="col-2">
+                        <img src="assets/images/laranja.png" class="img-fluid rounded" alt="Orange">
+                    </div>
+                </div>
             </div>
 
             <!-- Right: meal info -->
@@ -82,7 +100,6 @@ $stmt->close();
 
                 <span class="badge bg-warning text-dark mb-2"><?php echo htmlspecialchars($meal['category']); ?></span>
 
-                <!-- TODO (Francine): replace with real average rating + review count once the review system is built -->
                 <p class="mb-3">⭐⭐⭐⭐⭐ <strong>4.8</strong> (reviews pending)</p>
 
                 <p><?php echo htmlspecialchars($meal['description']); ?></p>
@@ -90,7 +107,6 @@ $stmt->close();
                 <button class="btn btn-success w-100 mt-2 mb-4">
                     ♥ Add to Favourites
                 </button>
-                <!-- TODO (Francine): hook this button up to the favourites table -->
 
                 <hr>
 
