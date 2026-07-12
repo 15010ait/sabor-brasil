@@ -12,7 +12,14 @@ if (!isset($_SESSION["user_id"])) {
 $stmt = $conn->prepare("SELECT id, username, email FROM users WHERE id = ?");
 $stmt->bind_param("i", $_SESSION["user_id"]);
 $stmt->execute();
+
 $user = $stmt->get_result()->fetch_assoc();
+
+// Check that the user exists
+if (!$user) {
+    die("User not found.");
+}
+
 $stmt->close();
 ?>
 

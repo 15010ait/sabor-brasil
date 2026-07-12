@@ -19,11 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $check->execute();
         $result = $check->get_result();
 
-        if ($result->num_rows > 0) {
-            $_SESSION['register_message'] = "This email is already registered.";
-            header("Location: register.php");
-            exit;
-        } else {
+       if ($result->num_rows > 0) {
+    $_SESSION['register_message'] = 'This email is already registered. <a href="login.php">Click here to log in.</a>';
+    header("Location: register.php");
+    exit;
+} else {
             // Hash the password
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -63,33 +63,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2 class="text-center mb-4">Register</h2>
 
         <?php if ($message): ?>
-            <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
+           <div class="alert alert-warning">
+            <?php echo $message; ?>
+            </div>
         <?php endif; ?>
 
-        <form method="POST" action="">
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Enter username">
-            </div>
+        <form method="POST" action="" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Enter username" autocomplete="username">
+    </div>
 
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Enter email">
-            </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" placeholder="Enter email" autocomplete="email">
+    </div>
 
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <div class="input-group">
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control"
-                        placeholder="Enter password">
-                </div>
-            </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Enter password" autocomplete="new-password">
+    </div>
 
-            <button type="submit" class="btn btn-success w-100">Register</button>
+    <button type="submit" class="btn btn-success w-100">Register</button>
+
+            <p class="text-center mt-3 mb-0">
+             Already have an account?
+            <a href="login.php">Login here</a>
+            </p>
         </form>
     </div>
 </div>
