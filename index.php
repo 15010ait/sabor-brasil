@@ -9,7 +9,10 @@ $featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
-        <a class="navbar-brand" href="index.php">🍽️ Sabor Brasil</a>
+        <a class="navbar-brand d-flex align-items-center" href="index.php">
+    <img src="assets/images/logo-saborbrasil.png" alt="Sabor Brasil" height="32" class="me-2">
+    Sabor Brasil
+</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
@@ -56,12 +59,12 @@ $featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
         </p>
     <?php endif; ?>
 
-    <div class="text-center py-5 bg-light rounded mb-4">
-        <h1 class="display-5 fw-bold">Welcome to Sabor Brasil</h1>
-        <p class="lead mb-0">
-            Discover, review, and save your favourite Brazilian meals.
-        </p>
-    </div>
+  <div class="text-center py-5 rounded mb-4 text-white" style="background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/images/banner.png') center/cover no-repeat; min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
+    <h1 class="display-5 fw-bold">Welcome to Sabor Brasil</h1>
+    <p class="lead mb-0">
+        Discover, review, and save your favourite Brazilian meals.
+    </p>
+</div>
 
     <h2 class="mb-4">Featured Brazilian Meals</h2>
 
