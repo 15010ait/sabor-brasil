@@ -80,16 +80,16 @@ $stmt->close();
                         <img src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>" class="img-fluid rounded" alt="<?php echo htmlspecialchars($meal['title']); ?>">
                     </div>
                     <div class="col-2">
-                        <img src="assets/images/couve.png" class="img-fluid rounded" alt="Collard greens">
+                        <img src="assets/images/couve.jpeg" class="img-fluid rounded" alt="Collard greens">
                     </div>
                     <div class="col-2">
-                        <img src="assets/images/farofa.png" class="img-fluid rounded" alt="Farofa">
+                        <img src="assets/images/farofa.jpeg" class="img-fluid rounded" alt="Farofa">
                     </div>
                     <div class="col-2">
-                        <img src="assets/images/arrozbranco.png" class="img-fluid rounded" alt="Rice">
+                        <img src="assets/images/arroz.jpeg" class="img-fluid rounded" alt="Rice">
                     </div>
                     <div class="col-2">
-                        <img src="assets/images/laranja.png" class="img-fluid rounded" alt="Orange">
+                        <img src="assets/images/laranja.jpeg" class="img-fluid rounded" alt="Orange">
                     </div>
                 </div>
             </div>
