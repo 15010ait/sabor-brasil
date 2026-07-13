@@ -18,6 +18,11 @@
     width: 100%;
 }
 
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}
+
 .home-hero {
     background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
                 url('../images/banner.png') center/cover no-repeat;
