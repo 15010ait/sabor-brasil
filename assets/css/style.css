@@ -1,9 +1,19 @@
 .login-hero {
     background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-                url('../images/login-image.png') center/cover no-repeat;
+                url('../images/banner-login.png') center/cover no-repeat;
 }
 
 .login-form-box {
+    max-width: 380px;
+    width: 100%;
+}
+
+.register-hero {
+    background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                url('../images/banner-register.png') center/cover no-repeat;
+}
+
+.register-form-box {
     max-width: 380px;
     width: 100%;
 }
