@@ -12,6 +12,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 $meal = $result->fetch_assoc();
 $stmt->close();
+
+// Fetch this meal's gallery images
+$galleryStmt = $conn->prepare("SELECT image FROM meal_images WHERE meal_id = ?");
+$galleryStmt->bind_param("i", $mealId);
+$galleryStmt->execute();
+$galleryResult = $galleryStmt->get_result();
+$galleryStmt->close();
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -66,7 +73,7 @@ $stmt->close();
 
         <div class="row mt-3">
 
-            <!-- Left: main image + side-dish thumbnail row -->
+            <!-- Left: main image + gallery -->
             <div class="col-md-7 mb-4">
                 <img
                     src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
@@ -74,23 +81,13 @@ $stmt->close();
                     alt="<?php echo htmlspecialchars($meal['title']); ?>"
                 >
 
-                <!-- Fixed side-dish thumbnails to match the mockup (same 4 photos for every meal, not from the database) -->
+                <!-- Gallery images specific to this meal -->
                 <div class="row g-2 mt-2">
-                    <div class="col-2">
-                        <img src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>" class="img-fluid rounded" alt="<?php echo htmlspecialchars($meal['title']); ?>">
-                    </div>
-                    <div class="col-2">
-                        <img src="assets/images/couve.jpeg" class="img-fluid rounded" alt="Collard greens">
-                    </div>
-                    <div class="col-2">
-                        <img src="assets/images/farofa.jpeg" class="img-fluid rounded" alt="Farofa">
-                    </div>
-                    <div class="col-2">
-                        <img src="assets/images/arroz.jpeg" class="img-fluid rounded" alt="Rice">
-                    </div>
-                    <div class="col-2">
-                        <img src="assets/images/laranja.jpeg" class="img-fluid rounded" alt="Orange">
-                    </div>
+                    <?php while ($img = $galleryResult->fetch_assoc()): ?>
+                        <div class="col-2">
+                            <img src="assets/images/<?php echo htmlspecialchars($img['image']); ?>" class="img-fluid rounded" alt="<?php echo htmlspecialchars($meal['title']); ?>">
+                        </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
 
