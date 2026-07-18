@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2026 at 01:27 PM
+-- Generation Time: Jul 18, 2026 at 11:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -143,7 +143,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`) VALUES
-(1, 'Francine', 'francine@email.com', '$2y$10$w0D7Ri5ezu4rXZovQ7CUo.12iYfGpVh1GC3xyGcHjcKNiNIvwdhcy', '2026-07-08 08:53:09');
+(1, 'Francine', 'francine@email.com', '$2y$10$w0D7Ri5ezu4rXZovQ7CUo.12iYfGpVh1GC3xyGcHjcKNiNIvwdhcy', '2026-07-08 08:53:09'),
+(2, 'Andre', '15182@ait.nsw.edu.au', '$2y$10$/p1AdZtnZls9QaycxIawv.WKt47zygTdAUkH2Z5EvGjEsYEl71AIm', '2026-07-18 09:50:56');
 
 --
 -- Indexes for dumped tables
@@ -217,7 +218,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
