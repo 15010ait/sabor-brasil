@@ -70,6 +70,25 @@ $reviewsStmt->bind_param("i", $mealId);
 $reviewsStmt->execute();
 $reviewsResult = $reviewsStmt->get_result();
 $reviewsStmt->close();
+
+
+// Fetch the average rating and total number of reviews for the current meal
+$ratingStmt = $conn->prepare("
+    SELECT
+        AVG(rating) AS average_rating,
+        COUNT(id) AS total_reviews
+    FROM reviews
+    WHERE meal_id = ?
+");
+$ratingStmt->bind_param("i", $mealId);
+$ratingStmt->execute();
+$ratingResult = $ratingStmt->get_result();
+$ratingData = $ratingResult->fetch_assoc();
+$ratingStmt->close();
+
+// Prepare the average rating and total review count for display
+$averageRating = isset($ratingData['average_rating']) ? round((float)$ratingData['average_rating'], 1) : 0;
+$totalReviews = isset($ratingData['total_reviews']) ? (int)$ratingData['total_reviews'] : 0;
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -159,8 +178,18 @@ $reviewsStmt->close();
                     <?php echo htmlspecialchars($meal['category']); ?>
                 </span>
 
-                <!-- Temporary rating display -->
-                <p class="mb-3">⭐⭐⭐⭐⭐ <strong>4.8</strong> (reviews pending)</p>
+                <!-- TODO (Francine): Replace this placeholder with the calculated average rating from the reviews table -->
+                <!-- <p class="mb-3">⭐⭐⭐⭐⭐ <strong>4.8</strong> (reviews pending)</p> -->
+
+                <?php if ($totalReviews > 0): ?>
+                   <p class="mb-3">
+                      <?php echo str_repeat("⭐", (int)round($averageRating)); ?>
+                      <strong><?php echo number_format($averageRating, 1); ?></strong>
+                      (<?php echo $totalReviews; ?> review<?php echo $totalReviews === 1 ? '' : 's'; ?>)
+                  </p>
+                <?php else: ?>
+                  <p class="mb-3 text-muted">No ratings yet</p>
+                <?php endif; ?>
 
                 <!-- Meal description -->
                 <p><?php echo htmlspecialchars($meal['description']); ?></p>
