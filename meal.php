@@ -5,27 +5,32 @@ require 'config/db.php';
 // Get the meal id from the URL (e.g. meal.php?id=3)
 $mealId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Handle review submission
+// Handle review submission from the form at the bottom of the page
 $reviewMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
+    // Make sure only logged-in users can submit reviews
     if (!isset($_SESSION['user_id'])) {
         $reviewMessage = "Please log in to write a review.";
     } else {
+        // Get the rating and comment from the form
         $rating = isset($_POST['rating']) ? intval($_POST['rating']) : 0;
         $comment = trim($_POST['comment']);
 
+        // Validate the rating value
         if ($rating < 1 || $rating > 5) {
             $reviewMessage = "Please choose a rating between 1 and 5.";
         } elseif (empty($comment)) {
             $reviewMessage = "Please write a comment.";
         } else {
+            // Insert the new review into the reviews table
             $insertStmt = $conn->prepare("
                 INSERT INTO reviews (user_id, meal_id, rating, comment)
                 VALUES (?, ?, ?, ?)
             ");
             $insertStmt->bind_param("iiis", $_SESSION['user_id'], $mealId, $rating, $comment);
 
+            // If saved successfully, reload the page so the new review appears
             if ($insertStmt->execute()) {
                 header("Location: meal.php?id=" . $mealId);
                 exit;
@@ -38,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     }
 }
 
-// Fetch the meal from the database
+// Fetch the meal details from the meals table
 $stmt = $conn->prepare("SELECT * FROM meals WHERE id = ?");
 $stmt->bind_param("i", $mealId);
 $stmt->execute();
@@ -46,16 +51,16 @@ $result = $stmt->get_result();
 $meal = $result->fetch_assoc();
 $stmt->close();
 
-// Fetch this meal's gallery images
+// Fetch gallery images for this meal from meal_images
 $galleryStmt = $conn->prepare("SELECT image FROM meal_images WHERE meal_id = ?");
 $galleryStmt->bind_param("i", $mealId);
 $galleryStmt->execute();
 $galleryResult = $galleryStmt->get_result();
 $galleryStmt->close();
 
-// Fetch reviews for this meal
+// Fetch reviews for this meal, joined with users so we can show usernames
 $reviewsStmt = $conn->prepare("
-    SELECT reviews.id, reviews.rating, reviews.comment, reviews.created_at, users.username
+    SELECT reviews.id, reviews.user_id, reviews.rating, reviews.comment, reviews.created_at, users.username
     FROM reviews
     INNER JOIN users ON reviews.user_id = users.id
     WHERE reviews.meal_id = ?
@@ -69,6 +74,7 @@ $reviewsStmt->close();
 
 <?php include 'includes/header.php'; ?>
 
+<!-- Main navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
         <a class="navbar-brand" href="index.php">
@@ -76,10 +82,12 @@ $reviewsStmt->close();
             Sabor Brasil
         </a>
 
+        <!-- Mobile navbar toggle -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
@@ -101,12 +109,14 @@ $reviewsStmt->close();
 
     <?php if (!$meal): ?>
 
+        <!-- Show this if the meal ID does not exist in the database -->
         <div class="alert alert-warning mt-4">
             Meal not found. <a href="index.php">Back to home</a>
         </div>
 
     <?php else: ?>
 
+        <!-- Breadcrumb navigation -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -117,13 +127,16 @@ $reviewsStmt->close();
 
         <div class="row mt-3">
 
+            <!-- Left side: main image and gallery thumbnails -->
             <div class="col-md-7 mb-4">
+                <!-- Main meal image -->
                 <img
                     src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
                     class="img-fluid rounded shadow-sm"
                     alt="<?php echo htmlspecialchars($meal['title']); ?>"
                 >
 
+                <!-- Gallery images for this meal -->
                 <div class="row g-2 mt-2">
                     <?php while ($img = $galleryResult->fetch_assoc()): ?>
                         <div class="col-2">
@@ -137,23 +150,29 @@ $reviewsStmt->close();
                 </div>
             </div>
 
+            <!-- Right side: meal information -->
             <div class="col-md-5">
                 <h1 class="fw-bold"><?php echo htmlspecialchars($meal['title']); ?></h1>
 
+                <!-- Category label -->
                 <span class="badge bg-warning text-dark mb-2">
                     <?php echo htmlspecialchars($meal['category']); ?>
                 </span>
 
+                <!-- Temporary rating display -->
                 <p class="mb-3">⭐⭐⭐⭐⭐ <strong>4.8</strong> (reviews pending)</p>
 
+                <!-- Meal description -->
                 <p><?php echo htmlspecialchars($meal['description']); ?></p>
 
+                <!-- Favourites button (not yet connected) -->
                 <button class="btn btn-success w-100 mt-2 mb-4">
                     ♥ Add to Favourites
                 </button>
 
                 <hr>
 
+                <!-- Extra metadata section -->
                 <div class="row text-center">
                     <div class="col-6 mb-3">
                         <strong>Category</strong><br>
@@ -169,6 +188,7 @@ $reviewsStmt->close();
 
         <hr class="my-4">
 
+        <!-- Reviews section -->
         <h3 class="mb-3">Reviews</h3>
 
         <?php if ($reviewsResult && $reviewsResult->num_rows > 0): ?>
@@ -176,31 +196,55 @@ $reviewsStmt->close();
                 <div class="card mb-3 shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
+                            <!-- Reviewer username -->
                             <strong><?php echo htmlspecialchars($review['username']); ?></strong>
+
+                            <!-- Star rating display -->
                             <span class="text-warning">
                                 <?php echo str_repeat("★", (int)$review['rating']); ?>
                             </span>
                         </div>
 
+                        <!-- Review comment -->
                         <p class="mb-0"><?php echo htmlspecialchars($review['comment']); ?></p>
+
+                        <!-- Only show edit/delete for the logged-in user's own review -->
+                        <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $review['user_id']): ?>
+                            <div class="mt-3">
+                                <a href="edit_review.php?id=<?php echo $review['id']; ?>" class="btn btn-sm btn-outline-primary">
+                                    Edit
+                                </a>
+
+                                <form action="delete_review.php" method="POST" class="d-inline">
+                                    <input type="hidden" name="review_id" value="<?php echo $review['id']; ?>">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this review?');">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
+            <!-- Message shown when there are no reviews yet -->
             <p class="text-muted">No reviews yet.</p>
         <?php endif; ?>
 
+        <!-- Review form for logged-in users -->
         <?php if (isset($_SESSION['user_id'])): ?>
             <div class="card mt-4 shadow-sm">
                 <div class="card-body">
                     <h4 class="h5 mb-3">Write a Review</h4>
 
+                    <!-- Validation / status message -->
                     <?php if (!empty($reviewMessage)): ?>
                         <div class="alert alert-warning">
                             <?php echo htmlspecialchars($reviewMessage); ?>
                         </div>
                     <?php endif; ?>
 
+                    <!-- Review submission form -->
                     <form method="POST" action="">
                         <input type="hidden" name="submit_review" value="1">
 
@@ -226,6 +270,7 @@ $reviewsStmt->close();
                 </div>
             </div>
         <?php else: ?>
+            <!-- Prompt shown to users who are not logged in -->
             <p class="text-muted mt-4">
                 Please <a href="login.php">log in</a> to write a review.
             </p>
