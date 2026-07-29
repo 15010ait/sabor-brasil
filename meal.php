@@ -19,6 +19,19 @@ $galleryStmt->bind_param("i", $mealId);
 $galleryStmt->execute();
 $galleryResult = $galleryStmt->get_result();
 $galleryStmt->close();
+
+// Fetch reviews for this meal
+$reviewsStmt = $conn->prepare("
+    SELECT reviews.id, reviews.rating, reviews.comment, reviews.created_at, users.username
+    FROM reviews
+    INNER JOIN users ON reviews.user_id = users.id
+    WHERE reviews.meal_id = ?
+    ORDER BY reviews.created_at DESC
+");
+$reviewsStmt->bind_param("i", $mealId);
+$reviewsStmt->execute();
+$reviewsResult = $reviewsStmt->get_result();
+$reviewsStmt->close();
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -55,14 +68,12 @@ $galleryStmt->close();
 
     <?php if (!$meal): ?>
 
-        <!-- Shown if the id in the URL doesn't match any meal -->
         <div class="alert alert-warning mt-4">
             Meal not found. <a href="index.php">Back to home</a>
         </div>
 
     <?php else: ?>
 
-        <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -73,7 +84,6 @@ $galleryStmt->close();
 
         <div class="row mt-3">
 
-            <!-- Left: main image + gallery -->
             <div class="col-md-7 mb-4">
                 <img
                     src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
@@ -81,7 +91,6 @@ $galleryStmt->close();
                     alt="<?php echo htmlspecialchars($meal['title']); ?>"
                 >
 
-                <!-- Gallery images specific to this meal -->
                 <div class="row g-2 mt-2">
                     <?php while ($img = $galleryResult->fetch_assoc()): ?>
                         <div class="col-2">
@@ -91,7 +100,6 @@ $galleryStmt->close();
                 </div>
             </div>
 
-            <!-- Right: meal info -->
             <div class="col-md-5">
                 <h1 class="fw-bold"><?php echo htmlspecialchars($meal['title']); ?></h1>
 
@@ -122,10 +130,26 @@ $galleryStmt->close();
 
         <hr class="my-4">
 
-        <!-- Reviews -->
         <h3 class="mb-3">Reviews</h3>
-        <!-- TODO (Francine): loop through the reviews table for this meal_id, and add the "Write a Review" form -->
-        <p class="text-muted">No reviews yet.</p>
+
+        <?php if ($reviewsResult && $reviewsResult->num_rows > 0): ?>
+            <?php while ($review = $reviewsResult->fetch_assoc()): ?>
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong><?php echo htmlspecialchars($review['username']); ?></strong>
+                            <span class="text-warning">
+                                <?php echo str_repeat("★", (int)$review['rating']); ?>
+                            </span>
+                        </div>
+
+                        <p class="mb-0"><?php echo htmlspecialchars($review['comment']); ?></p>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p class="text-muted">No reviews yet.</p>
+        <?php endif; ?>
 
     <?php endif; ?>
 
