@@ -2,37 +2,51 @@
 session_start();
 require 'config/db.php';
 
+// Show any message stored in the session
 $message = $_SESSION['register_message'] ?? '';
 unset($_SESSION['register_message']);
 
+// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Get and clean the form values
     $username = trim($_POST["username"]);
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
 
+    // Check that all fields are filled in
     if (empty($username) || empty($email) || empty($password)) {
         $message = "Please fill in all fields.";
-    } else {
-        // Check if email already exists
+    } 
+    // Password strength check
+    elseif (
+        strlen($password) < 8 ||
+        !preg_match('/[A-Z]/', $password) ||
+        !preg_match('/[a-z]/', $password) ||
+        !preg_match('/[0-9]/', $password)
+    ) {
+        $message = "Password must be at least 8 characters and include an uppercase letter, a lowercase letter, and a number.";
+    } 
+    else {
+        // Check if the email is already registered
         $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
         $check->bind_param("s", $email);
         $check->execute();
         $result = $check->get_result();
 
-       if ($result->num_rows > 0) {
-    $_SESSION['register_message'] = 'This email is already registered. <a href="login.php">Click here to log in.</a>';
-    header("Location: register.php");
-    exit;
-} else {
-            // Hash the password
+        if ($result->num_rows > 0) {
+            $_SESSION['register_message'] = 'This email is already registered. <a href="login.php">Click here to log in.</a>';
+            header("Location: register.php");
+            exit;
+        } else {
+            // Hash the password before saving it
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            // Insert new user
+            // Insert the new user into the database
             $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $username, $email, $hashedPassword);
 
             if ($stmt->execute()) {
-                $_SESSION['register_message'] = "Registration successful!";
+                $_SESSION['register_message'] = "Registration successful! Please log in.";
                 header("Location: register.php");
                 exit;
             } else {
