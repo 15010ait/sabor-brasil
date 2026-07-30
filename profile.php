@@ -72,7 +72,7 @@ $stmt->close();
                         <h3 class="mb-1"><?php echo htmlspecialchars($user['username']); ?></h3>
                         <p class="text-muted mb-0"><?php echo htmlspecialchars($user['email']); ?></p>
                     </div>
-                    <button class="btn btn-outline-success">Edit Profile</button>
+                    <a href="edit_profile.php" class="btn btn-outline-success">Edit Profile</a>
                     <!-- TODO (Francine): hook this up to an update-profile form (username/email/password) -->
                 </div>
             </div>
