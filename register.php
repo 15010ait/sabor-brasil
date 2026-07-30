@@ -16,8 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check that all fields are filled in
     if (empty($username) || empty($email) || empty($password)) {
         $message = "Please fill in all fields.";
-    } 
-    // Password strength check
+    }
+    // Check that the email is in a valid format
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = "Please enter a valid email address.";
+    }
+    // Check password strength
     elseif (
         strlen($password) < 8 ||
         !preg_match('/[A-Z]/', $password) ||
@@ -25,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         !preg_match('/[0-9]/', $password)
     ) {
         $message = "Password must be at least 8 characters and include an uppercase letter, a lowercase letter, and a number.";
-    } 
+    }
     else {
         // Check if the email is already registered
         $check = $conn->prepare("SELECT id FROM users WHERE email = ?");

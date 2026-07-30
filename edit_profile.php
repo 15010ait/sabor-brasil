@@ -35,7 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Username and email are required
     if (empty($username) || empty($email)) {
         $message = "Username and email are required.";
-    } else {
+    }
+    // Check that the email is in a valid format
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = "Please enter a valid email address.";
+    }
+    else {
         // Check whether the email is already used by another account
         $check = $conn->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
         $check->bind_param("si", $email, $_SESSION["user_id"]);
@@ -60,6 +65,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 // Make sure the new password and confirm password match
                 elseif ($newPassword !== $confirmNewPassword) {
                     $message = "New passwords do not match.";
+                }
+                // Make sure the new password is strong enough
+                elseif (
+                    strlen($newPassword) < 8 ||
+                    !preg_match('/[A-Z]/', $newPassword) ||
+                    !preg_match('/[a-z]/', $newPassword) ||
+                    !preg_match('/[0-9]/', $newPassword)
+                ) {
+                    $message = "Password must be at least 8 characters and include an uppercase letter, a lowercase letter, and a number.";
                 } else {
                     // Hash the new password before saving it
                     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
@@ -73,10 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $update->bind_param("sssi", $username, $email, $hashedPassword, $_SESSION["user_id"]);
 
                     if ($update->execute()) {
-                        // Update the session username so the navbar shows the new name
                         $_SESSION["username"] = $username;
-
-                        // Return to profile page after saving
                         header("Location: profile.php");
                         exit;
                     } else {
@@ -95,10 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $update->bind_param("ssi", $username, $email, $_SESSION["user_id"]);
 
                 if ($update->execute()) {
-                    // Update the session username so the navbar shows the new name
                     $_SESSION["username"] = $username;
-
-                    // Return to profile page after saving
                     header("Location: profile.php");
                     exit;
                 } else {
