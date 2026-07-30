@@ -66,6 +66,21 @@ $featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
         </p>
     </div>
 
+    <!-- Search bar -->
+<form method="GET" action="search.php" class="row g-2 justify-content-center mb-4">
+    <div class="col-md-8 col-lg-6">
+        <input
+            type="text"
+            name="q"
+            class="form-control form-control-lg"
+            placeholder="Search Brazilian meals..."
+        >
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success btn-lg">Search</button>
+    </div>
+</form>
+
     <h2 class="mb-4">Featured Brazilian Meals</h2>
 
     <div class="row">
