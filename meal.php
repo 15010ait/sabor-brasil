@@ -93,6 +93,12 @@ $totalReviews = isset($ratingData['total_reviews']) ? (int)$ratingData['total_re
 
 <?php include 'includes/header.php'; ?>
 
+<?php
+// Show favourite status message if one was set
+$favouriteMessage = $_SESSION["favourite_message"] ?? "";
+unset($_SESSION["favourite_message"]);
+?>
+
 <!-- Main navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
@@ -125,6 +131,12 @@ $totalReviews = isset($ratingData['total_reviews']) ? (int)$ratingData['total_re
 </nav>
 
 <div class="container mt-4">
+
+<?php if (!empty($favouriteMessage)): ?>
+    <div class="alert alert-info">
+        <?php echo htmlspecialchars($favouriteMessage); ?>
+    </div>
+<?php endif; ?>
 
     <?php if (!$meal): ?>
 
@@ -194,10 +206,19 @@ $totalReviews = isset($ratingData['total_reviews']) ? (int)$ratingData['total_re
                 <!-- Meal description -->
                 <p><?php echo htmlspecialchars($meal['description']); ?></p>
 
-                <!-- Favourites button (not yet connected) -->
-                <button class="btn btn-success w-100 mt-2 mb-4">
-                    ♥ Add to Favourites
-                </button>
+                <!-- Favourites button -->
+                <?php if (isset($_SESSION["user_id"])): ?>
+    <form action="add_favourite.php" method="POST" class="mb-4">
+        <input type="hidden" name="meal_id" value="<?php echo $mealId; ?>">
+        <button type="submit" class="btn btn-success w-100 mt-2">
+            ♥ Add to Favourites
+        </button>
+    </form>
+<?php else: ?>
+    <a href="login.php" class="btn btn-success w-100 mt-2 mb-4">
+        ♥ Log in to add favourites
+    </a>
+<?php endif; ?>
 
                 <hr>
 
