@@ -5,26 +5,54 @@ require 'config/db.php';
 // Get the search term from the URL, if the user typed something
 $query = isset($_GET['q']) ? trim($_GET['q']) : '';
 
-// Hold search results
-$searchResults = null;
+// Hold search terms and results
+$searchTerms = [];
+$allResults = [];
 $searchCount = 0;
 
-// Only run the query if the user entered a search term
+// Build a list of search terms
 if ($query !== '') {
-    $like = '%' . $query . '%';
+    $searchTerms[] = $query;
 
-    // Search meals by title, category, or description
-    $searchStmt = $conn->prepare("
-        SELECT id, title, category, description, image
-        FROM meals
-        WHERE title LIKE ? OR category LIKE ? OR description LIKE ?
-        ORDER BY title ASC
-    ");
-    $searchStmt->bind_param("sss", $like, $like, $like);
-    $searchStmt->execute();
-    $searchResults = $searchStmt->get_result();
-    $searchCount = $searchResults->num_rows;
-    $searchStmt->close();
+    // If the search term ends with "s", also try the singular version
+    // Example: "drinks" -> "drink"
+    if (strlen($query) > 1 && strtolower(substr($query, -1)) === 's') {
+        $singularTerm = substr($query, 0, -1);
+
+        if ($singularTerm !== '') {
+            $searchTerms[] = $singularTerm;
+        }
+    }
+
+    // Search each term and remove duplicate results
+    foreach ($searchTerms as $term) {
+        $like = '%' . $term . '%';
+
+        // Search meals by title, category, or description
+        $searchStmt = $conn->prepare("
+            SELECT id, title, category, description, image
+            FROM meals
+            WHERE title LIKE ? OR category LIKE ? OR description LIKE ?
+            ORDER BY title ASC
+        ");
+        $searchStmt->bind_param("sss", $like, $like, $like);
+        $searchStmt->execute();
+        $result = $searchStmt->get_result();
+
+        while ($meal = $result->fetch_assoc()) {
+            // Use meal ID as the key so duplicates are overwritten
+            $allResults[$meal['id']] = $meal;
+        }
+
+        $searchStmt->close();
+    }
+
+    // Sort results alphabetically by title after removing duplicates
+    uasort($allResults, function ($a, $b) {
+        return strcasecmp($a['title'], $b['title']);
+    });
+
+    $searchCount = count($allResults);
 }
 ?>
 
@@ -87,7 +115,7 @@ if ($query !== '') {
 
         <div class="row">
             <?php if ($searchCount > 0): ?>
-                <?php while ($meal = $searchResults->fetch_assoc()): ?>
+                <?php foreach ($allResults as $meal): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
                             <img
@@ -107,7 +135,7 @@ if ($query !== '') {
                             </div>
                         </div>
                     </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <p class="text-muted">No meals found for that search.</p>
             <?php endif; ?>
