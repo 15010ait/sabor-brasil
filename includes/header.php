@@ -1,3 +1,5 @@
+<?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,26 +26,26 @@
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home</a>
+                    <a class="nav-link <?php echo ($currentPage === 'index.php') ? 'active' : ''; ?>" href="index.php">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="meals.php">Meals</a>
+                    <a class="nav-link <?php echo ($currentPage === 'meals.php') ? 'active' : ''; ?>" href="meals.php">Meals</a>
                 </li>
 
                 <?php if (isset($_SESSION["user_id"])): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link <?php echo ($currentPage === 'profile.php') ? 'active' : ''; ?>" href="profile.php">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
+                        <a class="nav-link <?php echo ($currentPage === 'login.php') ? 'active' : ''; ?>" href="login.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="register.php">Register</a>
+                        <a class="nav-link <?php echo ($currentPage === 'register.php') ? 'active' : ''; ?>" href="register.php">Register</a>
                     </li>
                 <?php endif; ?>
             </ul>
