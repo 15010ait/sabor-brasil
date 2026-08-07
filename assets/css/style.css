@@ -1,3 +1,12 @@
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
 .login-hero {
     background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
                 url('../images/banner-login.png') center/cover no-repeat;
