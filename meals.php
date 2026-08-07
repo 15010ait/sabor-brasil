@@ -31,58 +31,6 @@ $mealsResult = $stmt->get_result();
 include 'includes/header.php';
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container">
-        <a class="navbar-brand" href="index.php">
-            <img
-                src="assets/images/logo-saborbrasil.png"
-                alt="Sabor Brasil"
-                height="75"
-            >
-            Sabor Brasil
-        </a>
-
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#menu"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="meals.php">Meals</a>
-                </li>
-
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Logout</a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="register.php">Register</a>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <div class="container my-5">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
