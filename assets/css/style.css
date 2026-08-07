@@ -77,3 +77,15 @@ h1, h2, h3, h4, h5, .navbar-brand {
     flex-direction: column;
     justify-content: center;
 }
+
+.meal-main-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.meal-thumbnail {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}

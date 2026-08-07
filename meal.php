@@ -154,7 +154,7 @@ unset($_SESSION["favourite_message"]);
                 <!-- Main meal image -->
                 <img
                     src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
-                    class="img-fluid rounded shadow-sm"
+                    class="img-fluid rounded shadow-sm meal-main-image"
                     alt="<?php echo htmlspecialchars($meal['title']); ?>"
                 >
 
@@ -164,7 +164,7 @@ unset($_SESSION["favourite_message"]);
                         <div class="col-2">
                             <img
                                 src="assets/images/<?php echo htmlspecialchars($img['image']); ?>"
-                                class="img-fluid rounded"
+                                class="img-fluid rounded meal-thumbnail"
                                 alt="<?php echo htmlspecialchars($meal['title']); ?>"
                             >
                         </div>
@@ -181,9 +181,6 @@ unset($_SESSION["favourite_message"]);
                     <?php echo htmlspecialchars($meal['category']); ?>
                 </span>
 
-                <!-- TODO (Francine): Replace this placeholder with the calculated average rating from the reviews table -->
-                <!-- <p class="mb-3">⭐⭐⭐⭐⭐ <strong>4.8</strong> (reviews pending)</p> -->
-
                 <?php if ($totalReviews > 0): ?>
                    <p class="mb-3">
                       <?php echo str_repeat("⭐", (int)round($averageRating)); ?>
@@ -198,27 +195,27 @@ unset($_SESSION["favourite_message"]);
                 <p><?php echo htmlspecialchars($meal['description']); ?></p>
 
                 <!-- Favourites button -->
-<?php if (isset($_SESSION["user_id"])): ?>
-    <?php if ($isFavourited): ?>
-        <form action="delete_favourite.php" method="POST" class="mb-4">
-            <input type="hidden" name="favourite_id" value="<?php echo $favouriteId; ?>">
-            <button type="submit" class="btn btn-outline-danger w-100 mt-2">
-                ♥ Remove from Favourites
-            </button>
-        </form>
-    <?php else: ?>
-        <form action="add_favourite.php" method="POST" class="mb-4">
-            <input type="hidden" name="meal_id" value="<?php echo $mealId; ?>">
-            <button type="submit" class="btn btn-success w-100 mt-2">
-                ♥ Add to Favourites
-            </button>
-        </form>
-    <?php endif; ?>
-<?php else: ?>
-    <a href="login.php" class="btn btn-success w-100 mt-2 mb-4">
-        ♥ Log in to add favourites
-    </a>
-<?php endif; ?>
+                <?php if (isset($_SESSION["user_id"])): ?>
+                    <?php if ($isFavourited): ?>
+                        <form action="delete_favourite.php" method="POST" class="mb-4">
+                            <input type="hidden" name="favourite_id" value="<?php echo $favouriteId; ?>">
+                            <button type="submit" class="btn btn-outline-danger w-100 mt-2">
+                                ♥ Remove from Favourites
+                            </button>
+                        </form>
+                    <?php else: ?>
+                        <form action="add_favourite.php" method="POST" class="mb-4">
+                            <input type="hidden" name="meal_id" value="<?php echo $mealId; ?>">
+                            <button type="submit" class="btn btn-success w-100 mt-2">
+                                ♥ Add to Favourites
+                            </button>
+                        </form>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a href="login.php" class="btn btn-success w-100 mt-2 mb-4">
+                        ♥ Log in to add favourites
+                    </a>
+                <?php endif; ?>
 
                 <hr>
 
