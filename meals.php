@@ -37,7 +37,7 @@ include 'includes/header.php';
             <img
                 src="assets/images/logo-saborbrasil.png"
                 alt="Sabor Brasil"
-                height="50"
+                height="75"
             >
             Sabor Brasil
         </a>
