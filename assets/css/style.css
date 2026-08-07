@@ -89,3 +89,34 @@ h1, h2, h3, h4, h5, .navbar-brand {
     height: 80px;
     object-fit: cover;
 }
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 48px;
+    height: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--sb-green);
+    border-radius: 50%;
+    opacity: 1;
+}
+
+.carousel-control-prev {
+    left: -24px;
+}
+
+.carousel-control-next {
+    right: -24px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: var(--sb-green-dark);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+    filter: none;
+}
