@@ -59,6 +59,24 @@ include 'includes/header.php';
 
     </div>
 
+    <form method="GET" action="meals.php" class="mb-4" style="max-width: 300px;">
+        <label for="categorySelect" class="form-label fw-semibold">Filter by category</label>
+        <select
+            name="category"
+            id="categorySelect"
+            class="form-select"
+            onchange="this.form.submit()"
+        >
+            <option value="" <?php echo ($category === '') ? 'selected' : ''; ?>>All Categories</option>
+            <option value="Main Course" <?php echo ($category === 'Main Course') ? 'selected' : ''; ?>>Main Course</option>
+            <option value="Dessert" <?php echo ($category === 'Dessert') ? 'selected' : ''; ?>>Dessert</option>
+            <option value="Snack" <?php echo ($category === 'Snack') ? 'selected' : ''; ?>>Snack</option>
+            <option value="Street Food" <?php echo ($category === 'Street Food') ? 'selected' : ''; ?>>Street Food</option>
+            <option value="Drink" <?php echo ($category === 'Drink') ? 'selected' : ''; ?>>Drink</option>
+            <option value="BBQ" <?php echo ($category === 'BBQ') ? 'selected' : ''; ?>>BBQ</option>
+        </select>
+    </form>
+
     <?php if ($mealsResult->num_rows > 0): ?>
 
         <div class="row g-4">
@@ -89,7 +107,7 @@ include 'includes/header.php';
                                 <?php echo htmlspecialchars($meal['category']); ?>
                             </p>
 
-                            <a
+                            
                                 href="meal.php?id=<?php echo $meal['id']; ?>"
                                 class="btn btn-success mt-auto"
                             >
