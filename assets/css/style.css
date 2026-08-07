@@ -1,3 +1,23 @@
+:root {
+  --sb-green: #0d5c3f;
+  --sb-green-dark: #0a4a32;
+  --sb-gold: #f4b400;
+}
+
+.navbar.bg-success {
+  background-color: var(--sb-green) !important;
+}
+
+.btn-success {
+  background-color: var(--sb-green) !important;
+  border-color: var(--sb-green) !important;
+}
+
+.btn-success:hover {
+  background-color: var(--sb-green-dark) !important;
+  border-color: var(--sb-green-dark) !important;
+}
+
 body {
   font-family: 'Nunito', sans-serif;
 }

@@ -76,65 +76,23 @@ $featuredMeals = $conn->query("SELECT * FROM meals ORDER BY RAND() LIMIT 3");
 
     <div class="row text-center g-3 mb-4">
 
-    <!-- Main Courses -->
-    <div class="col-6 col-md-4 col-lg-2">
-        <a href="meals.php?category=Main%20Course" class="text-decoration-none text-dark">
-            <div class="border rounded p-3 h-100">
-                <div style="font-size: 2rem;">🍽️</div>
-                <div class="mt-2 fw-semibold">Main Courses</div>
-            </div>
-        </a>
-    </div>
+   <!-- Main Courses -->
+<div style="font-size: 2rem; color: var(--sb-green);"><i class="bi bi-egg-fried"></i></div>
 
-    <!-- Desserts -->
-    <div class="col-6 col-md-4 col-lg-2">
-        <a href="meals.php?category=Dessert" class="text-decoration-none text-dark">
-            <div class="border rounded p-3 h-100">
-                <div style="font-size: 2rem;">🍰</div>
-                <div class="mt-2 fw-semibold">Desserts</div>
-            </div>
-        </a>
-    </div>
+<!-- Desserts -->
+<div style="font-size: 2rem; color: var(--sb-green);"><i class="bi bi-cake2"></i></div>
 
-    <!-- Snacks -->
-    <div class="col-6 col-md-4 col-lg-2">
-        <a href="meals.php?category=Snack" class="text-decoration-none text-dark">
-            <div class="border rounded p-3 h-100">
-                <div style="font-size: 2rem;">🥟</div>
-                <div class="mt-2 fw-semibold">Snacks</div>
-            </div>
-        </a>
-    </div>
+<!-- Snacks -->
+<div style="font-size: 2rem; color: var(--sb-green);"><i class="bi bi-basket2"></i></div>
 
-    <!-- Drinks -->
-    <div class="col-6 col-md-4 col-lg-2">
-        <a href="meals.php?category=Drink" class="text-decoration-none text-dark">
-            <div class="border rounded p-3 h-100">
-                <div style="font-size: 2rem;">🥤</div>
-                <div class="mt-2 fw-semibold">Drinks</div>
-            </div>
-        </a>
-    </div>
+<!-- Drinks -->
+<div style="font-size: 2rem; color: var(--sb-green);"><i class="bi bi-cup-straw"></i></div>
 
-    <!-- Vegetarian -->
-    <div class="col-6 col-md-4 col-lg-2">
-        <a href="meals.php?category=Vegetarian" class="text-decoration-none text-dark">
-            <div class="border rounded p-3 h-100">
-                <div style="font-size: 2rem;">🥗</div>
-                <div class="mt-2 fw-semibold">Vegetarian</div>
-            </div>
-        </a>
-    </div>
+<!-- Vegetarian -->
+<div style="font-size: 2rem; color: var(--sb-green);"><i class="bi bi-flower1"></i></div>
 
-    <!-- Seafood -->
-    <div class="col-6 col-md-4 col-lg-2">
-        <a href="meals.php?category=Seafood" class="text-decoration-none text-dark">
-            <div class="border rounded p-3 h-100">
-                <div style="font-size: 2rem;">🦐</div>
-                <div class="mt-2 fw-semibold">Seafood</div>
-            </div>
-        </a>
-    </div>
+<!-- Seafood -->
+<div style="font-size: 2rem; color: var(--sb-green);"><i class="bi bi-water"></i></div>
 
 </div>
 
