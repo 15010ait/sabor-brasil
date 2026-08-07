@@ -33,33 +33,31 @@ include 'includes/header.php';
 
 <div class="container my-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
+      <div class="text-center py-5 rounded mb-4 text-white meals-hero">
 
         <?php if ($category !== ''): ?>
 
-            <h1 class="fw-bold mb-1">
+            <h1 class="fw-bold display-6">
                 <?php echo htmlspecialchars($category); ?> Meals
             </h1>
 
-            <p class="text-muted mb-0">
+            <p class="lead mb-0">
                 Explore Brazilian meals from this category.
             </p>
 
         <?php else: ?>
 
-            <h1 class="fw-bold mb-1">
+            <h1 class="fw-bold display-6">
                 All Brazilian Meals
             </h1>
 
-            <p class="text-muted mb-0">
+            <p class="lead mb-0">
                 Explore all meals available in Sabor Brasil.
             </p>
 
         <?php endif; ?>
 
     </div>
-</div>
 
     <?php if ($mealsResult->num_rows > 0): ?>
 
