@@ -102,11 +102,11 @@ h1, h2, h3, h4, h5, .navbar-brand {
 }
 
 .carousel-control-prev {
-    left: -24px;
+    left: -50px;
 }
 
 .carousel-control-next {
-    right: -24px;
+    right: -50px;
 }
 
 .carousel-control-prev:hover,
