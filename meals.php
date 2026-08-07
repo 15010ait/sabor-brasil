@@ -107,10 +107,7 @@ include 'includes/header.php';
                                 <?php echo htmlspecialchars($meal['category']); ?>
                             </p>
 
-                            
-                                href="meal.php?id=<?php echo $meal['id']; ?>"
-                                class="btn btn-success mt-auto"
-                            >
+                            <a href="meal.php?id=<?php echo $meal['id']; ?>" class="btn btn-success mt-auto">
                                 View Details
                             </a>
 
