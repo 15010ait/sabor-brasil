@@ -5,7 +5,7 @@ require 'config/db.php';
 // Get the meal id from the URL (e.g. meal.php?id=3)
 $mealId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Handle review submission from the form at the bottom of the page
+// Process a new review submitted by a logged-in user
 $reviewMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
@@ -195,6 +195,7 @@ unset($_SESSION["favourite_message"]);
                 <p><?php echo htmlspecialchars($meal['description']); ?></p>
 
                 <!-- Favourites button -->
+                 <!-- Show the correct favourites action depending on whether the meal is already saved -->
                 <?php if (isset($_SESSION["user_id"])): ?>
                     <?php if ($isFavourited): ?>
                         <form action="delete_favourite.php" method="POST" class="mb-4">
