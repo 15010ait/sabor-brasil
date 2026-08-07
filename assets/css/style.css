@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
 }
 
 .card-img-top {
-    height: 330px;
+    height: 240px;
     object-fit: cover;
 }
 
@@ -59,4 +59,12 @@ h1, h2, h3, h4, h5, .navbar-brand {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
 }

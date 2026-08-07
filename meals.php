@@ -74,8 +74,7 @@ include 'includes/header.php';
                             src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
                             class="card-img-top"
                             alt="<?php echo htmlspecialchars($meal['title']); ?>"
-                            style="height: 260px; object-fit: cover;"
-                        >
+                      >
 
                         <div class="card-body d-flex flex-column">
 
