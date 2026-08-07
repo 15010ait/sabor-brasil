@@ -58,7 +58,7 @@ unset($_SESSION["favourite_message"]);
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
         <a class="navbar-brand" href="index.php">
-            <img src="assets/images/logo-saborbrasil.png" alt="Sabor Brasil" height="32">
+            <img src="assets/images/logo-saborbrasil.png" alt="Sabor Brasil" height="50">
             Sabor Brasil
         </a>
 
