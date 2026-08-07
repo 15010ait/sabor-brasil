@@ -51,6 +51,28 @@ $result = $stmt->get_result();
 $meal = $result->fetch_assoc();
 $stmt->close();
 
+// Check whether the logged-in user already favourited this meal
+$isFavourited = false;
+$favouriteId = null;
+
+if (isset($_SESSION["user_id"])) {
+    $favCheckStmt = $conn->prepare("
+        SELECT id
+        FROM favourites
+        WHERE user_id = ? AND meal_id = ?
+    ");
+    $favCheckStmt->bind_param("ii", $_SESSION["user_id"], $mealId);
+    $favCheckStmt->execute();
+    $favCheckResult = $favCheckStmt->get_result();
+
+    if ($favCheckResult->num_rows > 0) {
+        $isFavourited = true;
+        $favouriteId = $favCheckResult->fetch_assoc()['id'];
+    }
+
+    $favCheckStmt->close();
+}
+
 // Fetch gallery images for this meal from meal_images
 $galleryStmt = $conn->prepare("SELECT image FROM meal_images WHERE meal_id = ?");
 $galleryStmt->bind_param("i", $mealId);
@@ -176,13 +198,22 @@ unset($_SESSION["favourite_message"]);
                 <p><?php echo htmlspecialchars($meal['description']); ?></p>
 
                 <!-- Favourites button -->
-                <?php if (isset($_SESSION["user_id"])): ?>
-    <form action="add_favourite.php" method="POST" class="mb-4">
-        <input type="hidden" name="meal_id" value="<?php echo $mealId; ?>">
-        <button type="submit" class="btn btn-success w-100 mt-2">
-            ♥ Add to Favourites
-        </button>
-    </form>
+<?php if (isset($_SESSION["user_id"])): ?>
+    <?php if ($isFavourited): ?>
+        <form action="delete_favourite.php" method="POST" class="mb-4">
+            <input type="hidden" name="favourite_id" value="<?php echo $favouriteId; ?>">
+            <button type="submit" class="btn btn-outline-danger w-100 mt-2">
+                ♥ Remove from Favourites
+            </button>
+        </form>
+    <?php else: ?>
+        <form action="add_favourite.php" method="POST" class="mb-4">
+            <input type="hidden" name="meal_id" value="<?php echo $mealId; ?>">
+            <button type="submit" class="btn btn-success w-100 mt-2">
+                ♥ Add to Favourites
+            </button>
+        </form>
+    <?php endif; ?>
 <?php else: ?>
     <a href="login.php" class="btn btn-success w-100 mt-2 mb-4">
         ♥ Log in to add favourites
