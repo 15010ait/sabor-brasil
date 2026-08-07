@@ -2,12 +2,28 @@
 session_start();
 require 'config/db.php';
 
-// Fetch all meals from the database
-$stmt = $conn->prepare("
-    SELECT id, title, category, description, image
-    FROM meals
-    ORDER BY title ASC
-");
+// Get category from the URL.
+// Example: meals.php?category=Dessert
+$category = isset($_GET['category']) ? trim($_GET['category']) : '';
+
+// If a category was selected, show only meals from that category.
+// Otherwise, show all meals.
+if ($category !== '') {
+    $stmt = $conn->prepare("
+        SELECT id, title, category, description, image
+        FROM meals
+        WHERE category = ?
+        ORDER BY title ASC
+    ");
+
+    $stmt->bind_param("s", $category);
+} else {
+    $stmt = $conn->prepare("
+        SELECT id, title, category, description, image
+        FROM meals
+        ORDER BY title ASC
+    ");
+}
 
 $stmt->execute();
 $mealsResult = $stmt->get_result();
@@ -70,13 +86,32 @@ include 'includes/header.php';
 <div class="container my-5">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="fw-bold mb-1">All Brazilian Meals</h1>
+    <div>
+
+        <?php if ($category !== ''): ?>
+
+            <h1 class="fw-bold mb-1">
+                <?php echo htmlspecialchars($category); ?> Meals
+            </h1>
+
+            <p class="text-muted mb-0">
+                Explore Brazilian meals from this category.
+            </p>
+
+        <?php else: ?>
+
+            <h1 class="fw-bold mb-1">
+                All Brazilian Meals
+            </h1>
+
             <p class="text-muted mb-0">
                 Explore all meals available in Sabor Brasil.
             </p>
-        </div>
+
+        <?php endif; ?>
+
     </div>
+</div>
 
     <?php if ($mealsResult->num_rows > 0): ?>
 
