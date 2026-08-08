@@ -74,6 +74,8 @@ include 'includes/header.php';
             <option value="Street Food" <?php echo ($category === 'Street Food') ? 'selected' : ''; ?>>Street Food</option>
             <option value="Drink" <?php echo ($category === 'Drink') ? 'selected' : ''; ?>>Drink</option>
             <option value="BBQ" <?php echo ($category === 'BBQ') ? 'selected' : ''; ?>>BBQ</option>
+            <option value="Seafood" <?php echo ($category === 'Seafood') ? 'selected' : ''; ?>>Seafood</option>
+            <option value="Vegetarian" <?php echo ($category === 'Vegetarian') ? 'selected' : ''; ?>>Vegetarian</option>
         </select>
     </form>
 

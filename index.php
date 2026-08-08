@@ -119,73 +119,97 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
     <div class="row text-center g-3 mb-4">
 
         <!-- Main Courses -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
             <a href="meals.php?category=Main%20Course" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
                         <i class="bi bi-egg-fried"></i>
                     </div>
-                    <div class="mt-2 fw-semibold">Main Courses</div>
+                    <div class="mt-2 fw-semibold small">Main Courses</div>
                 </div>
             </a>
         </div>
 
         <!-- Desserts -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
             <a href="meals.php?category=Dessert" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
                         <i class="bi bi-cake2"></i>
                     </div>
-                    <div class="mt-2 fw-semibold">Desserts</div>
+                    <div class="mt-2 fw-semibold small">Desserts</div>
                 </div>
             </a>
         </div>
 
         <!-- Snacks -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
             <a href="meals.php?category=Snack" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
                         <i class="bi bi-basket2"></i>
                     </div>
-                    <div class="mt-2 fw-semibold">Snacks</div>
+                    <div class="mt-2 fw-semibold small">Snacks</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Street Food -->
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
+            <a href="meals.php?category=Street%20Food" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem; color: var(--sb-green);">
+                        <i class="bi bi-cart3"></i>
+                    </div>
+                    <div class="mt-2 fw-semibold small">Street Food</div>
                 </div>
             </a>
         </div>
 
         <!-- Drinks -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
             <a href="meals.php?category=Drink" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
                         <i class="bi bi-cup-straw"></i>
                     </div>
-                    <div class="mt-2 fw-semibold">Drinks</div>
+                    <div class="mt-2 fw-semibold small">Drinks</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- BBQ -->
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
+            <a href="meals.php?category=BBQ" class="text-decoration-none text-dark">
+                <div class="border rounded p-3 h-100">
+                    <div style="font-size: 2rem; color: var(--sb-green);">
+                        <i class="bi bi-fire"></i>
+                    </div>
+                    <div class="mt-2 fw-semibold small">BBQ</div>
                 </div>
             </a>
         </div>
 
         <!-- Vegetarian -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
             <a href="meals.php?category=Vegetarian" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
                         <i class="bi bi-flower1"></i>
                     </div>
-                    <div class="mt-2 fw-semibold">Vegetarian</div>
+                    <div class="mt-2 fw-semibold small">Vegetarian</div>
                 </div>
             </a>
         </div>
 
         <!-- Seafood -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-6 col-md-3" style="flex: 0 0 12.5%; max-width: 12.5%;">
             <a href="meals.php?category=Seafood" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
                         <i class="bi bi-water"></i>
                     </div>
-                    <div class="mt-2 fw-semibold">Seafood</div>
+                    <div class="mt-2 fw-semibold small">Seafood</div>
                 </div>
             </a>
         </div>
