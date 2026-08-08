@@ -1,3 +1,12 @@
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<!-- includes/footer.php -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-1">
+      &copy; <?php echo date("Y"); ?> Sabor Brasil. All rights reserved.
+    </p>
+    <p class="mb-0 small text-muted">
+      Developed by Andre Freitas &amp; Francine Yoneyama<br>
+      INT1059 Advanced Web Project — Australian Institute of Technology (AIT)
+    </p>
+  </div>
+</footer>
