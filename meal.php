@@ -156,6 +156,10 @@ unset($_SESSION["favourite_message"]);
                     src="assets/images/<?php echo htmlspecialchars($meal['image']); ?>"
                     class="img-fluid rounded shadow-sm meal-main-image"
                     alt="<?php echo htmlspecialchars($meal['title']); ?>"
+                    style="cursor: zoom-in;"
+                    data-bs-toggle="modal"
+                    data-bs-target="#imageModal"
+                    onclick="document.getElementById('modalImage').src = this.src;"
                 >
 
                 <!-- Gallery images for this meal -->
@@ -166,6 +170,10 @@ unset($_SESSION["favourite_message"]);
                                 src="assets/images/<?php echo htmlspecialchars($img['image']); ?>"
                                 class="img-fluid rounded meal-thumbnail"
                                 alt="<?php echo htmlspecialchars($meal['title']); ?>"
+                                style="cursor: zoom-in;"
+                                data-bs-toggle="modal"
+                                data-bs-target="#imageModal"
+                                onclick="document.getElementById('modalImage').src = this.src;"
                             >
                         </div>
                     <?php endwhile; ?>
@@ -326,6 +334,18 @@ unset($_SESSION["favourite_message"]);
 
     <?php endif; ?>
 
+</div>
+
+<!-- Image lightbox modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body p-0 text-center">
+                <button type="button" class="btn-close btn-close-white float-end m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                <img id="modalImage" src="" class="img-fluid rounded" alt="Enlarged meal image">
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include 'includes/footer.php'; ?>
