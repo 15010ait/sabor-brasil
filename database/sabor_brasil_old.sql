@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2026 at 01:16 AM
+-- Generation Time: Jul 18, 2026 at 11:53 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,22 +65,7 @@ INSERT INTO `meals` (`id`, `title`, `category`, `description`, `image`, `origin`
 (6, 'Guaraná', 'Drink', 'Sweet and refreshing Brazilian soft drink made from guaraná fruit.', 'guarana.jpeg', 'Brazil', '5 minutes', '1', '2026-07-08 04:32:27'),
 (7, 'Coxinha', 'Street Food', 'Crispy chicken-filled snack shaped like a teardrop.', 'coxinha.jpeg', 'Brazil', '45 minutes', '6', '2026-07-08 04:32:27'),
 (8, 'Pão de Queijo', 'Snack', 'Cheesy Brazilian bread rolls made with cassava flour.', 'paodequeijo.jpeg', 'Brazil', '40 minutes', '10', '2026-07-08 04:32:27'),
-(9, 'Picanha', 'BBQ', 'Traditional Brazilian grilled beef cut, typically served with rice, farofa and vinaigrette.', 'picanha.jpeg', 'Brazil', '1 hour', '4', '2026-07-13 10:42:01'),
-(10, 'Vatapá', 'Main Course', 'Creamy Bahian dish made with bread, shrimp, coconut milk, and dendê oil.', 'vatapa.png', 'Brazil', '1 hour', '4', '2026-08-07 23:53:56'),
-(11, 'Acarajé', 'Street Food', 'Deep-fried black-eyed pea fritter filled with vatapá and shrimp, from Bahia.', 'acaraje.png', 'Brazil', '50 minutes', '6', '2026-08-07 23:53:56'),
-(12, 'Tapioca com queijo', 'Snack', 'Gluten-free crepe made from cassava starch, filled with cheese.', 'tapioca.png', 'Brazil', '15 minutes', '1', '2026-08-07 23:53:56'),
-(13, 'Pastel clássico de carne', 'Street Food', 'Crispy deep-fried pastry filled with seasoned ground beef.', 'pastel.png', 'Brazil', '40 minutes', '8', '2026-08-07 23:53:56'),
-(14, 'Quindim', 'Dessert', 'Glossy baked custard made with egg yolks, sugar, and coconut.', 'quindim.png', 'Brazil', '1 hour', '8', '2026-08-07 23:53:56'),
-(15, 'Vinho quente', 'Drink', 'Warm spiced red wine, popular during Brazilian winter festivals.', 'vinho-quente.png', 'Brazil', '20 minutes', '4', '2026-08-07 23:53:56'),
-(16, 'Pão de alho', 'Snack', 'Garlic bread rolls grilled over charcoal, a Brazilian BBQ staple.', 'pao-de-alho.png', 'Brazil', '25 minutes', '8', '2026-08-07 23:53:56'),
-(17, 'Camarão na moranga', 'Seafood', 'Creamy shrimp stew served inside a roasted pumpkin.', 'camarao-na-moranga.png', 'Brazil', '1.5 hours', '6', '2026-08-07 23:53:56'),
-(18, 'Casquinha de siri', 'Seafood', 'Baked crab meat served in its shell, seasoned with herbs and breadcrumbs.', 'casquinha-de-siri.png', 'Brazil', '50 minutes', '4', '2026-08-07 23:53:56'),
-(19, 'Salada de palmito vegetariana', 'Vegetarian', 'Fresh heart of palm salad with tomatoes, herbs, and olive oil.', 'salada_de_palmito_veg.png', 'Brazil', '15 minutes', '4', '2026-08-07 23:53:56'),
-(20, 'Feijão tropeiro vegetariano', 'Vegetarian', 'Vegetarian version of the classic bean and cassava flour dish, without meat.', 'feijao_tropeiro_veg.png', 'Brazil', '45 minutes', '6', '2026-08-07 23:53:56'),
-(21, 'Escondidinho de mandioquinha vegetariano', 'Vegetarian', 'Baked casserole with mashed baby potatoes, mushrooms, and cheese.', 'escondidinho_de_mandioquinha_veg.png', 'Brazil', '1 hour', '6', '2026-08-07 23:53:56'),
-(22, 'Queijo Coalho', 'BBQ', 'Grilled halloumi-style cheese skewers, a popular Brazilian BBQ side.', 'queijo-coalho.png', 'Brazil', '15 minutes', '4', '2026-08-08 00:53:07'),
-(23, 'Linguiça Toscana', 'BBQ', 'Seasoned pork sausage, a classic addition to Brazilian churrasco.', 'linguica-toscana.png', 'Brazil', '25 minutes', '6', '2026-08-08 00:53:07'),
-(24, 'Bobó de Camarão', 'Seafood', 'Creamy shrimp stew made with cassava purée, coconut milk, and dendê oil.', 'bobo-de-camarao.png', 'Brazil', '1 hour', '4', '2026-08-08 00:53:07');
+(9, 'Picanha', 'BBQ', 'Traditional Brazilian grilled beef cut, typically served with rice, farofa and vinaigrette.', 'picanha.jpeg', 'Brazil', '1 hour', '4', '2026-07-13 10:42:01');
 
 -- --------------------------------------------------------
 
@@ -122,12 +107,7 @@ INSERT INTO `meal_images` (`id`, `meal_id`, `image`) VALUES
 (27, 7, 'coxinha2.jpeg'),
 (28, 7, 'coxinha3.jpeg'),
 (29, 7, 'coxinha4.jpeg'),
-(30, 8, 'paodequeijo2.jpeg'),
-(31, 11, 'acaraje2.png'),
-(32, 13, 'pastel2.png'),
-(33, 12, 'tapioca2.png'),
-(34, 16, 'pao-de-alho2.png'),
-(35, 18, 'casquinha-de-siri2.png');
+(30, 8, 'paodequeijo2.jpeg');
 
 -- --------------------------------------------------------
 
@@ -143,13 +123,6 @@ CREATE TABLE `reviews` (
   `comment` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reviews`
---
-
-INSERT INTO `reviews` (`id`, `user_id`, `meal_id`, `rating`, `comment`, `created_at`) VALUES
-(1, 2, 6, 5, 'Nice!', '2026-08-07 04:15:22');
 
 -- --------------------------------------------------------
 
@@ -171,7 +144,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`) VALUES
 (1, 'Francine', 'francine@email.com', '$2y$10$w0D7Ri5ezu4rXZovQ7CUo.12iYfGpVh1GC3xyGcHjcKNiNIvwdhcy', '2026-07-08 08:53:09'),
-(2, 'Andre', '15182@ait.nsw.edu.au', '$2y$10$MzPHSkEJp4ZBsQbIM/uZKe9mUbdOKHyzZIMoPnQu3OgtRuC94TcUK', '2026-08-07 04:05:10');
+(2, 'Andre', '15182@ait.nsw.edu.au', '$2y$10$/p1AdZtnZls9QaycxIawv.WKt47zygTdAUkH2Z5EvGjEsYEl71AIm', '2026-07-18 09:50:56');
 
 --
 -- Indexes for dumped tables
@@ -221,25 +194,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meals`
 --
 ALTER TABLE `meals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `meal_images`
 --
 ALTER TABLE `meal_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
