@@ -50,6 +50,10 @@ $favouritesStmt->close();
 <?php include 'includes/header.php'; ?>
 
 <?php
+// Show success message after updating the profile
+$profileMessage = $_SESSION["profile_message"] ?? "";
+unset($_SESSION["profile_message"]);
+
 // Show favourite status message if one was set
 $favouriteMessage = $_SESSION["favourite_message"] ?? "";
 unset($_SESSION["favourite_message"]);
@@ -57,11 +61,18 @@ unset($_SESSION["favourite_message"]);
 
 <div class="container mt-4">
 
-<?php if (!empty($favouriteMessage)): ?>
-    <div class="alert alert-info">
-        <?php echo htmlspecialchars($favouriteMessage); ?>
-    </div>
-<?php endif; ?>
+    <?php if (!empty($profileMessage)): ?>
+        <div class="alert alert-success">
+            <?php echo htmlspecialchars($profileMessage); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (!empty($favouriteMessage)): ?>
+        <div class="alert alert-info">
+            <?php echo htmlspecialchars($favouriteMessage); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="row">
 
         <!-- Sidebar -->
@@ -143,16 +154,17 @@ unset($_SESSION["favourite_message"]);
                                     <h5 class="card-title"><?php echo htmlspecialchars($fav['title']); ?></h5>
                                     <p class="text-muted"><?php echo htmlspecialchars($fav['category']); ?></p>
 
+                                    <!-- Show the correct favourites action depending on whether the meal is already saved -->
                                     <div class="mt-auto d-flex justify-content-between">
-    <a href="meal.php?id=<?php echo $fav['meal_id']; ?>" class="btn btn-sm btn-success">View Details</a>
+                                        <a href="meal.php?id=<?php echo $fav['meal_id']; ?>" class="btn btn-sm btn-success">View Details</a>
 
-    <form action="delete_favourite.php" method="POST" class="d-inline">
-        <input type="hidden" name="favourite_id" value="<?php echo $fav['favourite_id']; ?>">
-        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Remove this favourite?');">
-            Remove
-        </button>
-    </form>
-</div>
+                                        <form action="delete_favourite.php" method="POST" class="d-inline">
+                                            <input type="hidden" name="favourite_id" value="<?php echo $fav['favourite_id']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Remove this favourite?');">
+                                                Remove
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

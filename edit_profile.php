@@ -39,8 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check that the email is in a valid format
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "Please enter a valid email address.";
-    }
-    else {
+    } else {
         // Check whether the email is already used by another account
         $check = $conn->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
         $check->bind_param("si", $email, $_SESSION["user_id"]);
@@ -87,7 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $update->bind_param("sssi", $username, $email, $hashedPassword, $_SESSION["user_id"]);
 
                     if ($update->execute()) {
+                        // Update the session username so the navbar shows the new name
                         $_SESSION["username"] = $username;
+
+                        // Store a success message to show on the profile page
+                        $_SESSION["profile_message"] = "Your profile has been updated successfully.";
+
+                        // Return to profile page after saving
                         header("Location: profile.php");
                         exit;
                     } else {
@@ -106,7 +111,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $update->bind_param("ssi", $username, $email, $_SESSION["user_id"]);
 
                 if ($update->execute()) {
+                    // Update the session username so the navbar shows the new name
                     $_SESSION["username"] = $username;
+
+                    // Store a success message to show on the profile page
+                    $_SESSION["profile_message"] = "Your profile has been updated successfully.";
+
+                    // Return to profile page after saving
                     header("Location: profile.php");
                     exit;
                 } else {
