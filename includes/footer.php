@@ -6,7 +6,7 @@
     </p>
     <p class="mb-0 small" style="color: #cccccc;">
       Developed by Andre Perez &amp; Francine Yoneyama<br>
-      INT1059 Advanced Web Project — Australian Institute of Technology (AIT)
+      INT1059 Advanced Web Project — Academy of Interactive Technology (AIT)
     </p>
   </div>
 </footer>
