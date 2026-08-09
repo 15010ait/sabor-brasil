@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="row min-vh-100">
 
         <!-- Left: photo + brand message (hidden on small screens) -->
-        <div class="col-md-6 d-none d-md-flex text-white flex-column justify-content-end p-5 login-hero">
+        <div class="col-12 col-md-6 d-flex text-white flex-column justify-content-end p-4 p-md-5 login-hero" style="min-height: 200px;">
             <h2 class="fw-bold">Discover the Soul of Brazilian Food</h2>
             <p>Explore authentic recipes, discover hidden gems, and connect with a community that celebrates Brazil's rich culinary heritage.</p>
         </div>

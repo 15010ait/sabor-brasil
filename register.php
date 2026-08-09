@@ -80,8 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="container-fluid">
     <div class="row min-vh-100">
 
-        <!-- Left: photo + brand message (hidden on small screens) -->
-        <div class="col-md-6 d-none d-md-flex text-white flex-column justify-content-end p-5 register-hero">
+        <!-- Left: photo + brand message -->
+<div class="col-12 col-md-6 d-flex text-white flex-column justify-content-end p-4 p-md-5 register-hero" style="min-height: 200px;">
             <h2 class="fw-bold">Join the Sabor Brasil Community</h2>
             <p>Create your account to start reviewing, rating, and saving your favourite Brazilian dishes.</p>
         </div>
