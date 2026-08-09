@@ -119,7 +119,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
     <div class="row row-cols-2 row-cols-md-4 row-cols-lg-8 text-center g-3 mb-4">
 
         <!-- Main Courses -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=Main%20Course" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
@@ -131,7 +131,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </div>
 
         <!-- Desserts -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=Dessert" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
@@ -143,7 +143,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </div>
 
         <!-- Snacks -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=Snack" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
@@ -155,7 +155,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </div>
 
         <!-- Street Food -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=Street%20Food" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
@@ -167,7 +167,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </div>
 
         <!-- Drinks -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=Drink" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
@@ -179,7 +179,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </div>
 
         <!-- BBQ -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=BBQ" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
@@ -191,7 +191,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </div>
 
         <!-- Vegetarian -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=Vegetarian" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
@@ -203,7 +203,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </div>
 
         <!-- Seafood -->
-        <div class="col-6 col-md-3 col-lg-1">
+        <div class="col">
             <a href="meals.php?category=Seafood" class="text-decoration-none text-dark">
                 <div class="border rounded p-3 h-100">
                     <div style="font-size: 2rem; color: var(--sb-green);">
