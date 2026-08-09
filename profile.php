@@ -70,7 +70,7 @@ unset($_SESSION["favourite_message"]);
                 <a href="profile.php" class="list-group-item list-group-item-action active">Profile</a>
                 <a href="#my-reviews" class="list-group-item list-group-item-action">My Reviews</a>
                 <a href="#my-favourites" class="list-group-item list-group-item-action">My Favourites</a>
-                <a href="#" class="list-group-item list-group-item-action">Settings</a>
+                <a href="edit_profile.php" class="list-group-item list-group-item-action">Settings</a>
                 <a href="logout.php" class="list-group-item list-group-item-action text-danger">Logout</a>
             </div>
         </div>
