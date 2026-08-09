@@ -116,7 +116,7 @@ $mealSlides = array_chunk($allFeaturedMeals, 3);
         </a>
     </div>
 
-    <div class="row text-center g-3 mb-4">
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-8 text-center g-3 mb-4">
 
         <!-- Main Courses -->
         <div class="col-6 col-md-3 col-lg-1">
