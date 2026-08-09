@@ -177,34 +177,64 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <!-- Current password -->
                 <div class="mb-3">
                     <label class="form-label">Current Password</label>
-                    <input
-                        type="password"
-                        name="current_password"
-                        class="form-control"
-                        placeholder="Enter current password if changing your password"
-                    >
+                    <div class="input-group">
+                        <input
+                            type="password"
+                            name="current_password"
+                            id="current_password"
+                            class="form-control"
+                            placeholder="Enter current password if changing your password"
+                        >
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            onclick="togglePassword('current_password', this)"
+                        >
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- New password -->
                 <div class="mb-3">
                     <label class="form-label">New Password</label>
-                    <input
-                        type="password"
-                        name="new_password"
-                        class="form-control"
-                        placeholder="Leave blank if you do not want to change it"
-                    >
+                    <div class="input-group">
+                        <input
+                            type="password"
+                            name="new_password"
+                            id="new_password"
+                            class="form-control"
+                            placeholder="Leave blank if you do not want to change it"
+                        >
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            onclick="togglePassword('new_password', this)"
+                        >
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Confirm new password -->
                 <div class="mb-3">
                     <label class="form-label">Confirm New Password</label>
-                    <input
-                        type="password"
-                        name="confirm_new_password"
-                        class="form-control"
-                        placeholder="Repeat new password"
-                    >
+                    <div class="input-group">
+                        <input
+                            type="password"
+                            name="confirm_new_password"
+                            id="confirm_new_password"
+                            class="form-control"
+                            placeholder="Repeat new password"
+                        >
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            onclick="togglePassword('confirm_new_password', this)"
+                        >
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-success">Save Changes</button>
@@ -213,5 +243,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 </div>
+
+<script>
+    // Toggle password visibility for any password field on the page
+    function togglePassword(inputId, button) {
+        const input = document.getElementById(inputId);
+        const icon = button.querySelector("i");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        }
+    }
+</script>
 
 <?php include 'includes/footer.php'; ?>
